@@ -22,8 +22,8 @@
 <div *ngIf="openBrew.openBrewVersion">
 
   <div class="container">
-    <div class="flex-container" fxLayout="row wrap" fxLayout.xs="column">
-      <mat-card fxFlex.gt-xs="100%" [fxFlex.gt-md]="100">
+    <div class="flex-container" fxLayout="row wrap" fxLayout.xs="column" fxFill fxLayoutAlign="space-around center">
+      <mat-card fxFlex.gt-xs="90%" [fxFlex.gt-md]="90">
         <mat-card-title>{{openBrew.brewStyle}}</mat-card-title>
         <mat-card-subtitle></mat-card-subtitle>
         <mat-card-content>
@@ -34,39 +34,30 @@
   </div>
 
   <div class="container">
-    <div class="flex-container" fxLayout="row wrap" fxLayout.xs="column">
-      <mat-card fxFlex.gt-xs="100%" [fxFlex.gt-md]="100">
+    <div class="flex-container" fxLayout="row wrap" fxLayout.xs="column" fxFill fxLayoutAlign="space-around center">
+      <mat-card fxFlex.gt-xs="90%" [fxFlex.gt-md]="90">
         <mat-card-title>Werte</mat-card-title>
         <mat-card-subtitle></mat-card-subtitle>
         <mat-card-content>
-            Stammwürze
-            {{openBrew.originalWort.amount}}
-            {{openBrew.originalWort.ratioUnit}}
+          Stammwürze
+          {{openBrew.originalWort.amount}}
+          {{openBrew.originalWort.ratioUnit}}
         </mat-card-content>
         <mat-card-content>
-            Alkohol
-            {{openBrew.alcoholContent.amount}}
-            {{openBrew.alcoholContent.ratioUnit}}
+          Alkohol
+          {{openBrew.alcoholContent.amount}}
+          {{openBrew.alcoholContent.ratioUnit}}
         </mat-card-content>
         <mat-card-content>
-            Bitterness
-            {{openBrew.bitterness.amount}}
-            {{openBrew.bitterness.tasteUnit}}
+          Bitterness
+          {{openBrew.bitterness.amount}}
+          {{openBrew.bitterness.tasteUnit}}
         </mat-card-content>
         <mat-card-content>
-            Bitterness
-            {{openBrew.carbonDioxide.amount}}
-            {{openBrew.carbonDioxide.ratioUnit}}
+          Bitterness
+          {{openBrew.carbonDioxide.amount}}
+          {{openBrew.carbonDioxide.ratioUnit}}
         </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="flex-container" fxLayout="row wrap" fxLayout.xs="column">
-      <mat-card fxFlex.gt-xs="100%" [fxFlex.gt-md]="100">
-        <mat-card-title>Rohstoffe</mat-card-title>
-        <mat-card-subtitle></mat-card-subtitle>
         <mat-card-content>
           <h3>Wasser</h3>
           <div>
@@ -91,17 +82,6 @@
           {{openBrew.ingredients.yeast.name}}
           {{openBrew.ingredients.yeast.yeastAmount.amount}}
           {{openBrew.ingredients.yeast.yeastAmount.ratioUnit}}
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="flex-container" fxLayout="row wrap" fxLayout.xs="column">
-      <mat-card fxFlex.gt-xs="100%" [fxFlex.gt-md]="100">
-        <mat-card-title>Brauprozess</mat-card-title>
-        <!-- <mat-card-subtitle>Rasten</mat-card-subtitle> -->
-        <mat-card-content>
           <h3>Maische</h3>
           <div *ngFor="let rest of openBrew.brewing.mashing.rests">
             {{rest.name}} bei {{rest.targetTemperature.amount}} {{rest.targetTemperature.tempUnit}}
@@ -122,4 +102,9 @@
   h3 {
     font-weight: bolder;
   }
+  .mat-card{
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: none;
+    border: none;
+}
 </style>
