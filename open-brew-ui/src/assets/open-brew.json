@@ -104,10 +104,16 @@
 				"alpha": 5.5,
 				"shape": "pellet",
 				"type": "aroma"
+			},
+			{
+				"name": "Hersbrucker Bitter",
+				"alpha": 10.5,
+				"shape": "pellet",
+				"type": "bitter"
 			}
 		],
 		"yeast": {
-			"name": "nameofYeast",
+			"name": "Superhefe",
 			"yeastAmount": {
 				"amount": 2,
 				"ratioUnit": "gramsPerLiter"
