@@ -1,0 +1,189 @@
+{
+	"openBrewVersion": "1.0.0",
+	"encoding": "UTF-8",
+	"recipeName": "Deppendorfer Durstdoldensud",
+	"recipeVersion": 1,
+	"createDate": "2017-01-22T16:48:13+00:00",
+	"changeDate": "2017-01-26T19:47:27+00:00",
+	"brewStyle": "Amber Lager",
+	"descriptions": [
+		{
+			"language": "en",
+			"text": "This great beer must be brewed with passion. Otherwise it won't taste good."
+		},
+		{
+			"language": "de",
+			"text": "Dieses großartige Bier muss mit Leidenschaft gebraut werden. Sonst schmeckt es nicht gut."
+		}
+	],
+	"matureTime": {
+		"amount": 4,
+		"timeUnit": "weeks",
+		"hint": "addTemperature!!!!",
+		"descriptions": [
+			{
+				"language": "en",
+				"text": "This great beer must be brewed with passion. Otherwise it won't taste good."
+			},
+			{
+				"language": "de",
+				"text": "Dieses großartige Bier muss mit Leidenschaft gebraut werden. Sonst schmeckt es nicht gut."
+			}
+		]
+	},
+	"originalWort": {
+		"amount": 13.5,
+		"ratioUnit": "degreePlato"
+	},
+	"alcoholContent": {
+		"amount": 4.8,
+		"ratioUnit": "volumePercent"
+	},
+	"bitterness": {
+		"amount": 26,
+		"tasteUnit": "ibu"
+	},
+	"carbonDioxide": {
+		"amount": 5,
+		"ratioUnit": "gramsPerLiter"
+	},
+	"author": {
+		"private": true,
+		"brewery": "Hopfen Doldis",
+		"brewMaster": "Max Mustermann",
+		"url": "http://holdmybeer.de",
+		"phone": "+49 911 123456789",
+		"address": {
+			"street": "Examplestreet 14a",
+			"zip": "90411",
+			"city": "Nuremberg",
+			"federateState": "Bavaria",
+			"country": "Germany"
+		},
+		"geo": {
+			"latitude": 99.123,
+			"longitude": 47.123
+		}
+	},
+	"ingredients": {
+		"water": {
+			"alkalinity": {
+				"amount": 1.1,
+				"chemicalUnit": "dh"
+			}
+		},
+		"solids": [
+			{
+				"name": "Pilsener Malz",
+				"type": "pilsenerMalt",
+				"relativeAmount": {
+					"amount": 70,
+					"ratioUnit": "percent"
+				},
+				"color": {
+					"amount": 23,
+					"colorUnit": "ebc"
+				}
+			},
+			{
+				"name": "Münchner Malz II",
+				"type": "munichMalt",
+				"relativeAmount": {
+					"amount": 30,
+					"ratioUnit": "percent"
+				},
+				"color": {
+					"amount": 23,
+					"colorUnit": "ebc"
+				}
+			}
+		],
+		"hops": [
+			{
+				"name": "Spalter Aromahopfen",
+				"alpha": 5.5,
+				"shape": "pellet",
+				"type": "aroma"
+			}
+		],
+		"yeast": {
+			"name": "nameofYeast",
+			"yeastAmount": {
+				"amount": 2,
+				"ratioUnit": "gramsPerLiter"
+			},
+			"starterNeeded": true
+		}
+	},
+	"brewing": {
+		"mashing": {
+			"mashInTemperature": {
+				"amount": 57,
+				"tempUnit": "celsius"
+			},
+			"rests": [
+				{
+					"name": "Eiweißrast",
+					"withStirring": true,
+					"targetTemperature": {
+						"amount": 57,
+						"tempUnit": "celsius"
+					},
+					"restingTime": {
+						"amount": 10,
+						"timeUnit": "minutes"
+					}
+				},
+				{
+					"name": "Maltoserast",
+					"withStirring": true,
+					"targetTemperature": {
+						"amount": 63,
+						"tempUnit": "celsius"
+					},
+					"restingTime": {
+						"amount": 40,
+						"timeUnit": "minutes"
+					}
+				},
+				{
+					"name": "Verzuckerung",
+					"withStirring": true,
+					"targetTemperature": {
+						"amount": 73,
+						"tempUnit": "celsius"
+					},
+					"restingTime": {
+						"amount": 20,
+						"timeUnit": "minutes"
+					}
+				},
+				{
+					"name": "Abmaischen",
+					"withStirring": true,
+					"targetTemperature": {
+						"amount": 78,
+						"tempUnit": "celsius"
+					},
+					"restingTime": {
+						"amount": 0,
+						"timeUnit": "minutes"
+					}
+				}
+			]
+		},
+		"sparging": {
+			"missing": "to be defined...",
+			"restingTimeInMinutes": 20,
+			"amountOfWater": 23.2
+		},
+		"fermentation": {
+			"missing": "to be defined...",
+			"yeastName": "Safale WB40",
+			"yeastAmount": {
+				"amount": 11.0,
+				"weightUnit": "grams"
+			}
+		}
+	}
+}
