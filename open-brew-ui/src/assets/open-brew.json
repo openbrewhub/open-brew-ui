@@ -6,6 +6,7 @@
 	"createDate": "2017-01-22T16:48:13+00:00",
 	"changeDate": "2017-01-26T19:47:27+00:00",
 	"brewStyle": "Amber Lager",
+	"suggestedMashType": "Basic Infusion Mash - Step / Multistep Mashing - Decoction Mash",
 	"descriptions": [
 		{
 			"language": "en",
@@ -16,21 +17,6 @@
 			"text": "Dieses großartige Bier muss mit Leidenschaft gebraut werden. Sonst schmeckt es nicht gut."
 		}
 	],
-	"matureTime": {
-		"amount": 4,
-		"timeUnit": "weeks",
-		"hint": "addTemperature!!!!",
-		"descriptions": [
-			{
-				"language": "en",
-				"text": "This great beer must be brewed with passion. Otherwise it won't taste good."
-			},
-			{
-				"language": "de",
-				"text": "Dieses großartige Bier muss mit Leidenschaft gebraut werden. Sonst schmeckt es nicht gut."
-			}
-		]
-	},
 	"originalWort": {
 		"amount": 13.5,
 		"ratioUnit": "degreePlato"
@@ -48,21 +34,18 @@
 		"ratioUnit": "gramsPerLiter"
 	},
 	"author": {
-		"private": true,
-		"brewery": "Hopfen Doldis",
-		"brewMaster": "Max Mustermann",
-		"url": "http://holdmybeer.de",
+		"commercialBrewery": false,
+		"breweryName": "Hopfen Doldis",
+		"brewMasterName": "Max Mustermann",
+		"breweryUrl": "http://holdmybeer.de",
 		"phone": "+49 911 123456789",
 		"address": {
-			"street": "Examplestreet 14a",
+			"street": "Examplestreet",
+			"houseNumber": "14a",
 			"zip": "90411",
 			"city": "Nuremberg",
 			"federateState": "Bavaria",
 			"country": "Germany"
-		},
-		"geo": {
-			"latitude": 99.123,
-			"longitude": 47.123
 		}
 	},
 	"ingredients": {
@@ -70,12 +53,20 @@
 			"alkalinity": {
 				"amount": 1.1,
 				"chemicalUnit": "dh"
+			},
+			"mashWater": {
+				"amount": 23,
+				"volumeUnit": "liter"
+			},
+			"spargeWater": {
+				"amount": 16,
+				"volumeUnit": "liter"
 			}
 		},
 		"solids": [
 			{
 				"name": "Pilsener Malz",
-				"type": "pilsenerMalt",
+				"type": "grain",
 				"relativeAmount": {
 					"amount": 70,
 					"ratioUnit": "percent"
@@ -87,7 +78,7 @@
 			},
 			{
 				"name": "Münchner Malz II",
-				"type": "munichMalt",
+				"type": "grain",
 				"relativeAmount": {
 					"amount": 30,
 					"ratioUnit": "percent"
@@ -100,26 +91,24 @@
 		],
 		"hops": [
 			{
-				"name": "Spalter Aromahopfen",
-				"alpha": 5.5,
-				"shape": "pellet",
-				"type": "aroma"
-			},
-			{
-				"name": "Hersbrucker Bitter",
-				"alpha": 10.5,
+				"name": "Hallertau Magnum",
+				"alphaAcid": {
+					"amount": 14.5,
+					"chemicalUnit": "alphaAcid"
+				},
 				"shape": "pellet",
 				"type": "bitter"
-			}
-		],
-		"yeast": {
-			"name": "Superhefe",
-			"yeastAmount": {
-				"amount": 2,
-				"ratioUnit": "gramsPerLiter"
 			},
-			"starterNeeded": true
-		}
+			{
+				"name": "Spalter Select",
+				"alphaAcid": {
+					"amount": 5.5,
+					"chemicalUnit": "alphaAcid"
+				},
+				"shape": "pellet",
+				"type": "aroma"
+			}
+		]
 	},
 	"brewing": {
 		"mashing": {
@@ -178,18 +167,50 @@
 				}
 			]
 		},
-		"sparging": {
-			"missing": "to be defined...",
-			"restingTimeInMinutes": 20,
-			"amountOfWater": 23.2
+		"lautering": {
+
+		},
+		"cooking": {
+			
 		},
 		"fermentation": {
-			"missing": "to be defined...",
-			"yeastName": "Safale WB40",
-			"yeastAmount": {
-				"amount": 11.0,
-				"weightUnit": "grams"
+			"yeast": {
+				"yeastName": "Safale WB40",
+				"yeastType": "top-fermented",
+				"yeastAmount": {
+					"amount": 11.0,
+					"weightUnit": "grams"
+				},
+				"yeastStarterNeeded": true	
+			},
+			"targetTemperature": {
+				"amount": 19,
+				"tempUnit": "celsius"
+			},
+			"apparentAttenuation": {
+				"amount": 3.9,
+				"ratioUnit": "degreePlato"
 			}
+		},
+		"matureProcess": {
+			"targetTemperature": {
+				"amount": 2.5,
+				"tempUnit": "celsius"
+			},
+			"restingTime": {
+				"amount": 4,
+				"timeUnit": "week"
+			},
+			"descriptions": [
+				{
+					"language": "en",
+					"text": "A longer mature time will bring better results"
+				},
+				{
+					"language": "de",
+					"text": "Längere Reifezeit bringt hier auch bessere Ergebnisse."
+				}
+			]
 		}
 	}
 }

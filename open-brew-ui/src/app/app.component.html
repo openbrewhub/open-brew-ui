@@ -36,59 +36,57 @@
   <div class="container">
     <div class="flex-container" fxLayout="row wrap" fxLayout.xs="column" fxFill fxLayoutAlign="space-around center">
       <mat-card fxFlex.gt-xs="90%" [fxFlex.gt-md]="90">
-        <mat-card-title>Werte</mat-card-title>
         <mat-card-subtitle></mat-card-subtitle>
         <mat-card-content>
-          {{i18n.WORT}}
+          {{i18n.recipes.WORT.key}}
           {{openBrew.originalWort.amount}}
           {{openBrew.originalWort.ratioUnit}}
         </mat-card-content>
         <mat-card-content>
-          {{i18n.ALCOHOL}}
+          {{i18n.recipes.ALCOHOL.key}}
           {{openBrew.alcoholContent.amount}}
           {{openBrew.alcoholContent.ratioUnit}}
         </mat-card-content>
         <mat-card-content>
-          {{i18n.BITTERNESS}}
+          {{i18n.recipes.BITTERNESS.key}}
           {{openBrew.bitterness.amount}}
           {{openBrew.bitterness.tasteUnit}}
         </mat-card-content>
         <mat-card-content>
-          {{i18n.CARBONDIOXIDE}}
+          {{i18n.recipes.CARBONDIOXIDE.key}}
           {{openBrew.carbonDioxide.amount}}
           {{openBrew.carbonDioxide.ratioUnit}}
         </mat-card-content>
         <mat-card-content>
-          <h3>{{i18n.BREWINGWATER}}</h3>
+          <h2>{{i18n.recipes.BREWINGWATER.key}}</h2>
           <div>
             {{openBrew.ingredients.water.alkalinity.chemicalUnit}}
             {{openBrew.ingredients.water.alkalinity.amount}}
           </div>
         </mat-card-content>
         <mat-card-content>
-          <h3>{{i18n.MALT}}</h3>
+          <h2>{{i18n.recipes.MALT.key}}</h2>
           <div *ngFor="let malt of openBrew.ingredients.solids">
             {{malt.relativeAmount.amount}} {{malt.relativeAmount.ratioUnit}} {{malt.name}}
           </div>
         </mat-card-content>
         <mat-card-content>
-          <h3>{{i18n.HOP}}</h3>
+          <h2>{{i18n.recipes.HOP.key}}</h2>
           <div *ngFor="let hop of openBrew.ingredients.hops">
-            {{hop.name}} {{hop.shape}} alpha: {{hop.alpha}} {{hop.shape}}
+            <h2>{{hop.name}} {{hop.shape}}</h2>
+            <p>{{hop.alphaAcid.amount}} {{hop.alphaAcid.chemicalUnit}} {{hop.shape}}</p>
+            <p>{{hop.type}}</p>
           </div>
         </mat-card-content>
         <mat-card-content>
-          <h3>{{i18n.YEAST}}</h3>
-          {{openBrew.ingredients.yeast.name}}
-          {{openBrew.ingredients.yeast.yeastAmount.amount}}
-          {{openBrew.ingredients.yeast.yeastAmount.ratioUnit}}
-          <h3>Maische</h3>
-          <div *ngFor="let rest of openBrew.brewing.mashing.rests">
-            {{rest.name}} bei {{rest.targetTemperature.amount}} {{rest.targetTemperature.tempUnit}}
-          </div>
+          <h2>{{i18n.recipes.YEAST.key}}</h2>
+          {{openBrew.brewing.fermentation.yeast.yeastName}}
+          {{openBrew.brewing.fermentation.yeast.yeastAmount.amount}}
+          {{openBrew.brewing.fermentation.yeast.yeastType}}
+          {{openBrew.brewing.fermentation.yeast.yeastAmount.weightUnit}}
         </mat-card-content>
         <mat-card-content>
-          <h3>{{i18n.MASH}}</h3>
+          <h2>{{i18n.recipes.MASH.key}}</h2>
           <div *ngFor="let rest of openBrew.brewing.mashing.rests">
             {{rest.name}} bei {{rest.targetTemperature.amount}} {{rest.targetTemperature.tempUnit}}
           </div>
@@ -99,7 +97,7 @@
 </div>
 
 <style>
-  h3 {
+  h2 {
     font-weight: bolder;
   }
   .mat-card{

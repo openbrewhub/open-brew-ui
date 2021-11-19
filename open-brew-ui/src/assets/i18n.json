@@ -1,40 +1,160 @@
 {
-    "recipes": {
-        "WORT" : {
-            "en": "Wort",
-            "de": "Stammwürze"
+    "de": {
+        "menu": {
+            "LANGUAGE": {
+                "translation": {
+                    "key": "Sprache",
+                    "key_plural": "Sprachen"
+                }
+            },
+            "PRICING": {
+                "translation": {
+                    "key": "Preis",
+                    "key_plural": "Preise"
+                }
+            },
+            "SIGNUP": {
+                "translation": {
+                    "key": "Anmelden"
+                }
+            }
         },
-        "MATURE": {
-            "en": "Mature",
-            "de": "Gärung"
+        "recipe": {
+            "WORT": {
+                "translation": {
+                    "key": "Stammwürze",
+                    "key_plural": "Stammwürzen"
+                }
+            },
+            "MATURE": {
+                "translation": {
+                    "key": "Gärung",
+                    "key_plural": "Gärungen"
+                }
+            },
+            "YEAST": {
+                "translation": {
+                    "key": "Hefe",
+                    "key_plural": "Hefen"
+                }
+            },
+            "MASH": {
+                "translation": {
+                    "key": "Maische",
+                    "key_plural": "Maischen"
+                }
+            },
+            "MALT": {
+                "translation": {
+                    "key": "Malz"
+                }
+            },
+            "BREWINGWATER": {
+                "translation": {
+                    "key": "Brauwasser"
+                }
+            },
+            "HOP": {
+                "translation": {
+                    "key": "Hopfen"
+                }
+            },
+            "CARBONDIOXIDE": {
+                "translation": {
+                    "key": "Kohlensäure",
+                    "key_plural": "Kohlensäuren"
+                }
+            },
+            "BITTERNESS": {
+                "translation": {
+                    "key": "Bitterkeit",
+                    "key_plural": "Bitterkeiten"
+                }
+            },
+            "ALCOHOL": {
+                "translation": {
+                    "key": "Alkohol",
+                    "key_plural": "Alkohole"
+                }
+            }
+        }
+    },
+    "en": {
+        "menu": {
+            "LANGUAGE": {
+                "translation": {
+                    "key": "Language",
+                    "key_plural": "Languages"
+                }
+            },
+            "PRICING": {
+                "translation": {
+                    "key": "Pricing",
+                    "key_plural": "Pricings"
+                }
+            },
+            "SIGNUP": {
+                "translation": {
+                    "key": "Sign up"
+                }
+            }
         },
-        "YEAST": {
-            "en": "Yeast",
-            "de": "Hefe"
-        },
-        "MALT": {
-            "en": "Malt",
-            "de": "Malz"
-        },
-        "BREWINGWATER": {
-            "en": "Brewing Water",
-            "de": "Brauwasser"
-        },
-        "HOP": {
-            "en": "Hop",
-            "de": "Hopfen"
-        },
-        "CARBONDIOXIDE": {
-            "en": "Carbondioxide",
-            "de": "Kohlensäure"
-        },
-        "BITTERNESS": {
-            "en": "Bitterness",
-            "de": "IBU"
-        },
-        "ALCOHOL": {
-            "en": "Alcohol",
-            "de": "Alkohol"
+        "recipe": {
+            "WORT": {
+                "translation": {
+                    "key": "Wort"
+                }
+            },
+            "MATURE": {
+                "translation": {
+                    "key": "Mature"
+                }
+            },
+            "YEAST": {
+                "translation": {
+                    "key": "Yeast",
+                    "key_plural": "Yeasts"
+                }
+            },
+            "MASH": {
+                "translation": {
+                    "key": "Mash",
+                    "key_plural": "Mashes"
+                }
+            },
+            "MALT": {
+                "translation": {
+                    "key": "Malt",
+                    "key_plural": "Malts"
+                }
+            },
+            "BREWINGWATER": {
+                "translation": {
+                    "key": "Brewing water"
+                }
+            },
+            "HOP": {
+                "translation": {
+                    "key": "Hop"
+                }
+            },
+            "CARBONDIOXIDE": {
+                "translation": {
+                    "key": "Carbondioxide",
+                    "key_plural": "Carbondioxides"
+                }
+            },
+            "BITTERNESS": {
+                "translation": {
+                    "key": "Bitterness"
+                }
+            },
+            "ALCOHOL": {
+                "translation": {
+                    "key": "Alcohol",
+                    "key_plural": "Alcohols"
+                }
+            }
         }
     }
 }

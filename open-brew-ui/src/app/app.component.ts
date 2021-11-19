@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { I18n, OpenBrew, OpenBrewViewModel } from './models/open-brew-model';
+import { i18n } from './models/i18n'
+import { OpenBrew, OpenBrewViewModel } from './models/open-brew-model';
 import { MenuItem } from './models/menu-item';
 
 @Component({
@@ -24,25 +25,13 @@ export class AppComponent implements AfterViewInit {
     localStorage.setItem("language", value)
   }
 
-  i18n: any = {};
   openBrew: OpenBrewViewModel = {} as OpenBrewViewModel;
+  i18n: i18n = {} as i18n;
 
-  menuItems: MenuItem[] = [
-    {
-      label: 'Sign Up',
-      icon: 'login',
-    },
-    {
-      label: 'Pricing',
-      icon: 'attach_money',
-    },
-    {
-      label: 'Language',
-      icon: 'english',
-    },
-  ];
+  menuItems: MenuItem[] = [];
 
   constructor(private httpClient: HttpClient) {
+    this.fetchI18n();
   }
 
   ngAfterViewInit() {
@@ -53,20 +42,38 @@ export class AppComponent implements AfterViewInit {
       });
   }
 
-  setLanguage() {
+  changeLanguage() {
     if (this.language == "en")
-      this.language = "de"
+      this.language = "de";
     else
-      this.language = "en"
+      this.language = "en";
 
+    this.fetchI18n();
+  }
+
+  fetchI18n() {
     this.httpClient.get('assets/i18n.json', { responseType: 'json' })
       .subscribe(response => {
-        this.i18n = new I18n(response, this.language);
+        this.i18n = new i18n(response, this.language);
+        
+        this.menuItems = [
+          {
+            label: this.i18n.menu.LANGUAGE.key,
+            icon: 'language',
+          },
+          {
+            label: this.i18n.menu.PRICING.key,
+            icon: 'attach_money',
+          },
+          {
+            label: this.i18n.menu.SIGNUP.key,
+            icon: 'login',
+          },
+        ];
       });
   }
 
   onClick($event: Event) {
-    this.setLanguage()
+    this.changeLanguage();
   }
-
 }
