@@ -1,5 +1,6 @@
 class I18nTranslation {
 
+
     constructor(private json: any, private language: string, private category: string) {
     }
 
@@ -31,9 +32,9 @@ class Menu extends I18nTranslation {
     constructor(json: any, language: string) {
         super(json, language, "menu");
 
-        this.LANGUAGE = this.getTranslation(nameof(this.LANGUAGE))
-        this.PRICING = this.getTranslation(nameof(this.PRICING))
-        this.SIGNUP = this.getTranslation(nameof(this.SIGNUP))
+        this.LANGUAGE = this.getTranslation("LANGUAGE");
+        this.PRICING = this.getTranslation("PRICING");
+        this.SIGNUP = this.getTranslation("SIGNUP");
     }
 }
 
@@ -52,16 +53,16 @@ class Recipes extends I18nTranslation {
     constructor(json: any, language: string) {
         super(json, language, "recipe");
 
-        this.WORT = this.getTranslation(nameof(this.WORT));
-        this.MATURE = this.getTranslation(nameof(this.MATURE))
-        this.MASH = this.getTranslation(nameof(this.MASH))
-        this.YEAST = this.getTranslation(nameof(this.YEAST))
-        this.MALT = this.getTranslation(nameof(this.MALT))
-        this.BREWINGWATER = this.getTranslation(nameof(this.BREWINGWATER))
-        this.HOP = this.getTranslation(nameof(this.HOP))
-        this.CARBONDIOXIDE = this.getTranslation(nameof(this.CARBONDIOXIDE))
-        this.BITTERNESS = this.getTranslation(nameof(this.BITTERNESS))
-        this.ALCOHOL = this.getTranslation(nameof(this.ALCOHOL))
+        this.WORT = this.getTranslation("WORT");
+        this.MATURE = this.getTranslation("MATURE");
+        this.MASH = this.getTranslation("MASH");
+        this.YEAST = this.getTranslation("YEAST");
+        this.MALT = this.getTranslation("MALT");
+        this.BREWINGWATER = this.getTranslation("BREWINGWATER");
+        this.HOP = this.getTranslation("HOP");
+        this.CARBONDIOXIDE = this.getTranslation("CARBONDIOXIDE");
+        this.BITTERNESS = this.getTranslation("BITTERNESS");
+        this.ALCOHOL = this.getTranslation("ALCOHOL");
     }
 }
 
