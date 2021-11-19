@@ -1,0 +1,40 @@
+{
+    "recipes": {
+        "WORT" : {
+            "en": "Wort",
+            "de": "Stammwürze"
+        },
+        "MATURE": {
+            "en": "Mature",
+            "de": "Gärung"
+        },
+        "YEAST": {
+            "en": "Yeast",
+            "de": "Hefe"
+        },
+        "MALT": {
+            "en": "Malt",
+            "de": "Malz"
+        },
+        "BREWINGWATER": {
+            "en": "Brewing Water",
+            "de": "Brauwasser"
+        },
+        "HOP": {
+            "en": "Hop",
+            "de": "Hopfen"
+        },
+        "CARBONDIOXIDE": {
+            "en": "Carbondioxide",
+            "de": "Kohlensäure"
+        },
+        "BITTERNESS": {
+            "en": "Bitterness",
+            "de": "IBU"
+        },
+        "ALCOHOL": {
+            "en": "Alcohol",
+            "de": "Alkohol"
+        }
+    }
+}

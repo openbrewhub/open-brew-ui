@@ -1,5 +1,5 @@
 
-export interface MenuItem {
-  label: string;
-  icon: string;
+export class MenuItem {
+  label: string = "";
+  icon: string = "";
 }

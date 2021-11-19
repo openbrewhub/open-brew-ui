@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { OpenBrew } from './models/open-brew-model';
+import { I18n, OpenBrew, OpenBrewViewModel } from './models/open-brew-model';
 import { MenuItem } from './models/menu-item';
 
 @Component({
@@ -8,51 +8,65 @@ import { MenuItem } from './models/menu-item';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit{
+export class AppComponent implements AfterViewInit {
 
-  language: string = "de"
-  content: any = [];
-  json: any = {};
-  openBrew: OpenBrew = {} as OpenBrew;
+  get language(): string {
+    let language = localStorage.getItem("language") as string;
+    if (!language) {
+      language = "de"
+      localStorage.setItem("language", language);
+    }
+
+    return language;
+  }
+
+  set language(value: string) {
+    localStorage.setItem("language", value)
+  }
+
+  i18n: any = {};
+  openBrew: OpenBrewViewModel = {} as OpenBrewViewModel;
 
   menuItems: MenuItem[] = [
     {
       label: 'Sign Up',
-      icon: 'login'
-    },
-    {
-      label: 'About',
-      icon: 'help'
+      icon: 'login',
     },
     {
       label: 'Pricing',
-      icon: 'attach_money'
+      icon: 'attach_money',
     },
     {
-      label: 'Docs',
-      icon: 'notes'
-    },
-    {
-      label: 'Showcase',
-      icon: 'slideshow'
-    },
-    {
-      label: 'Blog',
-      icon: 'rss_feed'
+      label: 'Language',
+      icon: 'english',
     },
   ];
 
-
   constructor(private httpClient: HttpClient) {
-   
   }
 
   ngAfterViewInit() {
     this.httpClient.get('assets/open-brew.json', { responseType: 'json' })
-    .subscribe(response => {
-      console.log(JSON.stringify(response))
-      this.openBrew = response as OpenBrew;
-    });
-  } 
+      .subscribe(response => {
+        let openBrew = response as OpenBrew;
+        this.openBrew = new OpenBrewViewModel(openBrew, this.language);
+      });
+  }
+
+  setLanguage() {
+    if (this.language == "en")
+      this.language = "de"
+    else
+      this.language = "en"
+
+    this.httpClient.get('assets/i18n.json', { responseType: 'json' })
+      .subscribe(response => {
+        this.i18n = new I18n(response, this.language);
+      });
+  }
+
+  onClick($event: Event) {
+    this.setLanguage()
+  }
 
 }

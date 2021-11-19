@@ -13,13 +13,29 @@ import { MatMenuModule } from "@angular/material/menu"
 import { MatDividerModule } from "@angular/material/divider"
 import { MatIconModule } from "@angular/material/icon"
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { HttpClientModule } from '@angular/common/http';
-import { WortComponent } from './wort/wort.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
+import { Injectable } from '@angular/core';
+import { OpenBrew, OpenBrewViewModel } from './models/open-brew-model';
+
+// @Injectable()
+// export class Globals {
+//   language: string = "de"
+//   openBrew: OpenBrewViewModel = {} as OpenBrewViewModel;
+
+//   constructor(private httpClient: HttpClient) {
+//     this.httpClient.get('assets/open-brew.json', { responseType: 'json' })
+//       .subscribe(response => {
+//         console.log(JSON.stringify(response))
+//         let openBrew = response as OpenBrew;
+//         this.openBrew = new OpenBrewViewModel(openBrew, this.language);
+//       });
+//   }
+// }
 
 @NgModule({
   declarations: [
     AppComponent,
-    WortComponent,
   ],
   imports: [
     BrowserModule,

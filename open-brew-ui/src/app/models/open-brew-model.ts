@@ -1,10 +1,6 @@
 
-export interface Description {
-    language: string;
-    text: string;
-}
 
-export interface Description2 {
+export interface Description {
     language: string;
     text: string;
 }
@@ -13,7 +9,18 @@ export interface MatureTime {
     amount: number;
     timeUnit: string;
     hint: string;
-    descriptions: Description2[];
+    descriptions: Description[];
+}
+
+export class MatureTimeViewModel {
+    amount: number = 0;
+    timeUnit: string = "";
+    hint: string = "";
+    description: string = "";
+
+    constructor(descriptions: Description[], language: string) {
+        this.description = descriptions.find(x => x.language == language)?.text!
+    }
 }
 
 export interface OriginalWort {
@@ -160,15 +167,32 @@ export interface Brewing {
     fermentation: Fermentation;
 }
 
-export class OpenBrew {
+export interface OpenBrew {
+    openBrewVersion: string;
+    encoding: string;
+    recipeName: string;
+    recipeVersion: number;
+    createDate: Date;
+    changeDate: Date;
+    brewStyle: string;
+    descriptions: Description[];
+    matureTime: MatureTime;
+    originalWort: OriginalWort;
+    alcoholContent: AlcoholContent;
+    bitterness: Bitterness;
+    carbonDioxide: CarbonDioxide;
+    author: Author;
+    ingredients: Ingredients;
+    brewing: Brewing;
+}
+
+export class OpenBrewViewModel {
     openBrewVersion: string = "";
-    encoding: string = ""
-    recipeName: string = ""
     recipeVersion: number = 0;
     createDate: Date = new Date();
     changeDate: Date = new Date();
     brewStyle: string = "";
-    descriptions: Description[] = [];
+    description: string = ""
     matureTime: MatureTime = {} as MatureTime;
     originalWort: OriginalWort = {} as OriginalWort;
     alcoholContent: AlcoholContent = {} as AlcoholContent;
@@ -177,7 +201,44 @@ export class OpenBrew {
     author: Author = {} as Author;
     ingredients: Ingredients = {} as Ingredients;
     brewing: Brewing = {} as Brewing;
+
+    constructor(openBrew: OpenBrew, language: string) {
+        this.openBrewVersion = openBrew.openBrewVersion;
+        this.recipeVersion = openBrew.recipeVersion;
+        this.createDate = openBrew.createDate;
+        this.brewStyle = openBrew.brewStyle;
+        this.description = openBrew.descriptions.find(x => x.language == language)?.text!
+        this.matureTime = openBrew.matureTime;
+        this.originalWort = openBrew.originalWort;
+        this.alcoholContent = openBrew.alcoholContent;
+        this.bitterness = openBrew.bitterness;
+        this.carbonDioxide = openBrew.carbonDioxide;
+        this.author = openBrew.author;
+        this.ingredients = openBrew.ingredients;
+        this.brewing = openBrew.brewing;
+    }
 }
 
+export class I18n {
+    WORT: string = "";
+    MATURE: string = "";
+    YEAST: string = "";
+    MALT: string = "";
+    BREWINGWATER: string = "";
+    HOP: string = "";
+    CARBONDIOXIDE: string = "";
+    BITTERNESS: string = "";
+    ALCOHOL: string = "";
 
-
+    constructor(json: any, language: string) {
+        this.WORT = json.recipes.WORT[language];
+        this.MATURE = json.recipes.MATURE[language];
+        this.YEAST = json.recipes.YEAST[language];
+        this.MALT = json.recipes.MALT[language];
+        this.BREWINGWATER = json.recipes.BREWINGWATER[language];
+        this.HOP = json.recipes.HOP[language];
+        this.CARBONDIOXIDE = json.recipes.CARBONDIOXIDE[language];
+        this.BITTERNESS = json.recipes.BITTERNESS[language];
+        this.ALCOHOL = json.recipes.ALCOHOL[language];
+    }
+}

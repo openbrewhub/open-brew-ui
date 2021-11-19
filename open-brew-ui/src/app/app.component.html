@@ -2,17 +2,17 @@
   <span fxFlex>
     <img src="../assets/logo.png" height="50">
     obenbrewhub.com</span>
-  <button mat-button *ngFor="let item of menuItems" fxHide.xs>
+  <button mat-button *ngFor="let item of menuItems" fxHide.xs (click)="onClick($event)">
     <mat-icon class="mr">{{item.icon}}</mat-icon>
     {{item.label}}
   </button>
   <button mat-icon-button [matMenuTriggerFor]="dropMenu" fxHide fxShow.xs>
     <mat-icon>more_vert</mat-icon>
   </button>
-  <mat-menu #dropMenu="matMenu">
+  <mat-menu #dropMenu="matMenu" >
     <ng-container *ngFor="let item of menuItems">
-      <button mat-menu-item>
-        <mat-icon class="mr">{{item.icon}}</mat-icon>
+      <button mat-menu-item  (click)="onClick($event)">
+        <mat-icon  class="mr">{{item.icon}}</mat-icon>
         {{item.label}}
       </button>
       <mat-divider></mat-divider>
@@ -27,7 +27,7 @@
         <mat-card-title>{{openBrew.brewStyle}}</mat-card-title>
         <mat-card-subtitle></mat-card-subtitle>
         <mat-card-content>
-          {{openBrew.descriptions[1].text}}
+          {{openBrew.description}}
         </mat-card-content>
       </mat-card>
     </div>
@@ -39,46 +39,46 @@
         <mat-card-title>Werte</mat-card-title>
         <mat-card-subtitle></mat-card-subtitle>
         <mat-card-content>
-          Stammwürze
+          {{i18n.WORT}}
           {{openBrew.originalWort.amount}}
           {{openBrew.originalWort.ratioUnit}}
         </mat-card-content>
         <mat-card-content>
-          Alkohol
+          {{i18n.ALCOHOL}}
           {{openBrew.alcoholContent.amount}}
           {{openBrew.alcoholContent.ratioUnit}}
         </mat-card-content>
         <mat-card-content>
-          Bitterness
+          {{i18n.BITTERNESS}}
           {{openBrew.bitterness.amount}}
           {{openBrew.bitterness.tasteUnit}}
         </mat-card-content>
         <mat-card-content>
-          Bitterness
+          {{i18n.CARBONDIOXIDE}}
           {{openBrew.carbonDioxide.amount}}
           {{openBrew.carbonDioxide.ratioUnit}}
         </mat-card-content>
         <mat-card-content>
-          <h3>Wasser</h3>
+          <h3>{{i18n.BREWINGWATER}}</h3>
           <div>
             {{openBrew.ingredients.water.alkalinity.chemicalUnit}}
             {{openBrew.ingredients.water.alkalinity.amount}}
           </div>
         </mat-card-content>
         <mat-card-content>
-          <h3>Malz</h3>
+          <h3>{{i18n.MALT}}</h3>
           <div *ngFor="let malt of openBrew.ingredients.solids">
             {{malt.relativeAmount.amount}} {{malt.relativeAmount.ratioUnit}} {{malt.name}}
           </div>
         </mat-card-content>
         <mat-card-content>
-          <h3>Hopfen</h3>
+          <h3>{{i18n.HOP}}</h3>
           <div *ngFor="let hop of openBrew.ingredients.hops">
             {{hop.name}} {{hop.shape}} alpha: {{hop.alpha}} {{hop.shape}}
           </div>
         </mat-card-content>
         <mat-card-content>
-          <h3>Hefe</h3>
+          <h3>{{i18n.YEAST}}</h3>
           {{openBrew.ingredients.yeast.name}}
           {{openBrew.ingredients.yeast.yeastAmount.amount}}
           {{openBrew.ingredients.yeast.yeastAmount.ratioUnit}}
@@ -88,7 +88,7 @@
           </div>
         </mat-card-content>
         <mat-card-content>
-          <h3>Maische</h3>
+          <h3>{{i18n.MASH}}</h3>
           <div *ngFor="let rest of openBrew.brewing.mashing.rests">
             {{rest.name}} bei {{rest.targetTemperature.amount}} {{rest.targetTemperature.tempUnit}}
           </div>
