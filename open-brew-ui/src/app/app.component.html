@@ -73,9 +73,8 @@
         <mat-card-content>
           <h2>{{i18n.recipes.HOP.key}}</h2>
           <div *ngFor="let hop of openBrew.ingredients.hops">
-            <h2>{{hop.name}} {{hop.shape}}</h2>
+            <b>{{hop.name}} {{hop.shape}} - {{hop.type}}</b>
             <p>{{hop.alphaAcid.amount}} {{hop.alphaAcid.chemicalUnit}} {{hop.shape}}</p>
-            <p>{{hop.type}}</p>
           </div>
         </mat-card-content>
         <mat-card-content>
