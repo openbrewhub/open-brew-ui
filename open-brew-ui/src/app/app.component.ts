@@ -35,7 +35,11 @@ export class AppComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.httpClient.get('assets/open-brew.json', { responseType: 'json' })
+    this.newMethod();
+  }
+
+  private newMethod() {
+    this.httpClient.get('https://openbrew-definition-prod.s3.eu-central-1.amazonaws.com/open-brew-1-0-0.example.json', { responseType: 'json' })
       .subscribe(response => {
         let openBrew = response as OpenBrew;
         this.openBrew = new OpenBrewViewModel(openBrew, this.language);
@@ -49,6 +53,8 @@ export class AppComponent implements AfterViewInit {
       this.language = "en";
 
     this.fetchI18n();
+
+    this.newMethod();
   }
 
   fetchI18n() {
