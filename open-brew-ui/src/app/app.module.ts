@@ -14,10 +14,14 @@ import { MatDividerModule } from "@angular/material/divider"
 import { MatIconModule } from "@angular/material/icon"
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
+import { AddRecipeComponent } from './add-recipe/add-recipe.component';
+import { RecipeComponent } from './recipe/recipe.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AddRecipeComponent,
+    RecipeComponent,
   ],
   imports: [
     BrowserModule,

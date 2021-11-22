@@ -4,24 +4,14 @@ export interface Description {
     text: string;
 }
 
-export interface OriginalWort {
-    amount: number;
-    ratioUnit: string;
+export interface Image {
+    url: string;
+    description: Description[];
 }
 
-export interface AlcoholContent {
-    amount: number;
-    ratioUnit: string;
-}
-
-export interface Bitterness {
-    amount: number;
-    tasteUnit: string;
-}
-
-export interface CarbonDioxide {
-    amount: number;
-    ratioUnit: string;
+export interface RecipeDescription {
+    language: string;
+    text: string;
 }
 
 export interface Address {
@@ -34,6 +24,7 @@ export interface Address {
 }
 
 export interface Author {
+    openBrewHubId: number;
     commercialBrewery: boolean;
     breweryName: string;
     brewMasterName: string;
@@ -42,28 +33,54 @@ export interface Author {
     address: Address;
 }
 
-export interface Alkalinity {
+export interface Info {
+    recipeName: string;
+    recipeVersion: number;
+    beerType: string;
+    source: string;
+    createDate: Date;
+    changeDate: Date;
+    images: Image[];
+    recipeDescription: RecipeDescription[];
+    author: Author;
+}
+
+export interface ExpectedEfficiency {
+    amount: number;
+    relativeUnit: string;
+}
+
+export interface ExpectedOriginalGravity {
+    amount: number;
+    ratioUnit: string;
+}
+
+export interface ExpectedFinalGravity {
+    amount: number;
+    ratioUnit: string;
+}
+
+export interface AlcoholContent {
+    amount: number;
+    ratioUnit: string;
+}
+
+export interface PhValue {
     amount: number;
     chemicalUnit: string;
 }
 
-export interface MashWater {
+export interface WaterAlkalinity {
     amount: number;
-    volumeUnit: string;
+    chemicalUnit: string;
 }
 
-export interface SpargeWater {
+export interface Bitterness {
     amount: number;
-    volumeUnit: string;
+    tasteUnit: string;
 }
 
-export interface Water {
-    alkalinity: Alkalinity;
-    mashWater: MashWater;
-    spargeWater: SpargeWater;
-}
-
-export interface RelativeAmount {
+export interface CarbonationLevel {
     amount: number;
     ratioUnit: string;
 }
@@ -73,34 +90,44 @@ export interface Color {
     colorUnit: string;
 }
 
+export interface VitalStatistics {
+    expectedEfficiency: ExpectedEfficiency;
+    expectedOriginalGravity: ExpectedOriginalGravity;
+    expectedFinalGravity: ExpectedFinalGravity;
+    alcoholContent: AlcoholContent;
+    PhValue: PhValue;
+    waterAlkalinity: WaterAlkalinity;
+    bitterness: Bitterness;
+    carbonationLevel: CarbonationLevel;
+    color: Color;
+    _comment: string;
+}
+
+export interface Water {
+    amount: number;
+    volumeUnit: string;
+}
+
+export interface WaterTreatment {
+    type: string;
+    amount: number;
+    volumeUnit: string;
+}
+
+export interface MashWater {
+    water: Water;
+    waterTreatment: WaterTreatment[];
+}
+
+export interface Portion {
+    amount: number;
+    weightUnit: string;
+}
+
 export interface Solid {
     name: string;
     type: string;
-    relativeAmount: RelativeAmount;
-    color: Color;
-}
-
-export interface AlphaAcid {
-    amount: number;
-    chemicalUnit: string;
-}
-
-export interface Hop {
-    name: string;
-    alphaAcid: AlphaAcid;
-    shape: string;
-    type: string;
-}
-
-export interface Ingredients {
-    water: Water;
-    solids: Solid[];
-    hops: Hop[];
-}
-
-export interface MashInTemperature {
-    amount: number;
-    tempUnit: string;
+    portion: Portion;
 }
 
 export interface TargetTemperature {
@@ -120,15 +147,53 @@ export interface Rest {
     restingTime: RestingTime;
 }
 
-export interface Mashing {
-    mashInTemperature: MashInTemperature;
+export interface Mash {
+    suggestedMashTypeDescription: string;
+    mashWater: MashWater;
+    solids: Solid[];
     rests: Rest[];
 }
 
-export interface Lautering {
+export interface SpargeWater {
+    water: Water;
+    waterTreatment: WaterTreatment[];
+    targetTemperature: TargetTemperature;
 }
 
-export interface Cooking {
+export interface Lauter {
+    withStirring: boolean;
+    restingTime: RestingTime;
+    spargeWater: SpargeWater;
+}
+
+export interface OverallCookingTime {
+    amount: number;
+    timeUnit: string;
+}
+
+export interface AlphaAcid {
+    amount: number;
+    chemicalUnit: string;
+}
+
+export interface Time {
+    amount: number;
+    timeUnit: string;
+}
+
+export interface Hop {
+    name: string;
+    alphaAcid: AlphaAcid;
+    shape: string;
+    type: string;
+    use: string;
+    time: Time;
+}
+
+export interface Boil {
+    overallCookingTime: OverallCookingTime;
+    targetTemperature: TargetTemperature;
+    hops: Hop[];
 }
 
 export interface YeastAmount {
@@ -143,33 +208,33 @@ export interface Yeast {
     yeastStarterNeeded: boolean;
 }
 
-
 export interface ApparentAttenuation {
     amount: number;
     ratioUnit: string;
+}
+
+export interface SecondaryFermentation {
+    _comment4: string;
 }
 
 export interface Fermentation {
     yeast: Yeast;
     targetTemperature: TargetTemperature;
     apparentAttenuation: ApparentAttenuation;
+    secondaryFermentation: SecondaryFermentation;
 }
 
-export interface RestingTime2 {
-    amount: number;
-    timeUnit: string;
-}
 
 export interface MatureProcess {
     targetTemperature: TargetTemperature;
-    restingTime: RestingTime2;
+    restingTime: RestingTime;
     descriptions: Description[];
 }
 
-export interface Brewing {
-    mashing: Mashing;
-    lautering: Lautering;
-    cooking: Cooking;
+export interface Brew {
+    mash: Mash;
+    lauter: Lauter;
+    boil: Boil;
     fermentation: Fermentation;
     matureProcess: MatureProcess;
 }
@@ -177,20 +242,9 @@ export interface Brewing {
 export interface OpenBrew {
     openBrewVersion: string;
     encoding: string;
-    recipeName: string;
-    recipeVersion: number;
-    createDate: Date;
-    changeDate: Date;
-    brewStyle: string;
-    suggestedMashType: string;
-    descriptions: Description[];
-    originalWort: OriginalWort;
-    alcoholContent: AlcoholContent;
-    bitterness: Bitterness;
-    carbonDioxide: CarbonDioxide;
-    author: Author;
-    ingredients: Ingredients;
-    brewing: Brewing;
+    info: Info;
+    vitalStatistics: VitalStatistics;
+    brew: Brew;
 }
 
 export class OpenBrewViewModel {
@@ -200,27 +254,31 @@ export class OpenBrewViewModel {
     changeDate: Date = new Date();
     brewStyle: string = "";
     description: string = ""
-    originalWort: OriginalWort = {} as OriginalWort;
+    originalGravity: ExpectedOriginalGravity = {} as ExpectedOriginalGravity;
     alcoholContent: AlcoholContent = {} as AlcoholContent;
     bitterness: Bitterness = {} as Bitterness;
-    carbonDioxide: CarbonDioxide = {} as CarbonDioxide;
+    carbonationLevel: CarbonationLevel = {} as CarbonationLevel;
     author: Author = {} as Author;
-    ingredients: Ingredients = {} as Ingredients;
-    brewing: Brewing = {} as Brewing;
+    mash: Mash = {} as Mash;
+    brew: Brew = {} as Brew;
 
     constructor(openBrew: OpenBrew, language: string) {
         this.openBrewVersion = openBrew.openBrewVersion;
-        this.recipeVersion = openBrew.recipeVersion;
-        this.createDate = openBrew.createDate;
-        this.brewStyle = openBrew.brewStyle;
-        this.description = openBrew.descriptions.find(x => x.language == language)?.text!
-        this.originalWort = openBrew.originalWort;
-        this.alcoholContent = openBrew.alcoholContent;
-        this.bitterness = openBrew.bitterness;
-        this.carbonDioxide = openBrew.carbonDioxide;
+        this.recipeVersion = openBrew.info.recipeVersion;
+        this.createDate = openBrew.info.createDate;
+        this.brewStyle = openBrew.info.recipeName;
+        this.description = openBrew.info.recipeDescription.find(x => x.language == language)?.text!
 
-        this.author = openBrew.author;
-        this.ingredients = openBrew.ingredients;
-        this.brewing = openBrew.brewing;
+        this.originalGravity = openBrew.vitalStatistics.expectedFinalGravity;
+        this.alcoholContent = openBrew.vitalStatistics.alcoholContent;
+        this.bitterness = openBrew.vitalStatistics.bitterness;
+        this.carbonationLevel = openBrew.vitalStatistics.carbonationLevel;
+
+        this.author = openBrew.info.author;
+        this.mash = openBrew.brew.mash;
+        this.brew = openBrew.brew;
     }
 }
+
+
+

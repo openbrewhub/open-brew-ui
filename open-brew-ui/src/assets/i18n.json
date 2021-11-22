@@ -20,7 +20,7 @@
             }
         },
         "recipe": {
-            "WORT": {
+            "ORIGINIAL_GRAVITY": {
                 "translation": {
                     "key": "Stammwürze",
                     "key_plural": "Stammwürzen"
@@ -59,7 +59,7 @@
                     "key": "Hopfen"
                 }
             },
-            "CARBONDIOXIDE": {
+            "CARBONATIONLEVEL": {
                 "translation": {
                     "key": "Kohlensäure",
                     "key_plural": "Kohlensäuren"
@@ -100,9 +100,9 @@
             }
         },
         "recipe": {
-            "WORT": {
+            "ORIGINIAL_GRAVITY": {
                 "translation": {
-                    "key": "Wort"
+                    "key": "Final gravity"
                 }
             },
             "MATURE": {
@@ -138,10 +138,9 @@
                     "key": "Hop"
                 }
             },
-            "CARBONDIOXIDE": {
+            "CARBONATIONLEVEL": {
                 "translation": {
-                    "key": "Carbondioxide",
-                    "key_plural": "Carbondioxides"
+                    "key": "Carbonation level"
                 }
             },
             "BITTERNESS": {

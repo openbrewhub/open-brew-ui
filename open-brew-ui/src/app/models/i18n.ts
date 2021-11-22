@@ -39,28 +39,28 @@ class Menu extends I18nTranslation {
 }
 
 class Recipes extends I18nTranslation {
-    WORT: Translation = new Translation();
+    ORIGINIAL_GRAVITY: Translation = new Translation();
     MATURE: Translation = new Translation();
     YEAST: Translation = new Translation();
     MASH: Translation = new Translation();
     MALT: Translation = new Translation();
     BREWINGWATER: Translation = new Translation();
     HOP: Translation = new Translation();
-    CARBONDIOXIDE: Translation = new Translation();
+    CARBONATIONLEVEL: Translation = new Translation();
     BITTERNESS: Translation = new Translation();
     ALCOHOL: Translation = new Translation();
 
     constructor(json: any, language: string) {
         super(json, language, "recipe");
 
-        this.WORT = this.getTranslation("WORT");
+        this.ORIGINIAL_GRAVITY = this.getTranslation("ORIGINIAL_GRAVITY");
         this.MATURE = this.getTranslation("MATURE");
         this.MASH = this.getTranslation("MASH");
         this.YEAST = this.getTranslation("YEAST");
         this.MALT = this.getTranslation("MALT");
         this.BREWINGWATER = this.getTranslation("BREWINGWATER");
         this.HOP = this.getTranslation("HOP");
-        this.CARBONDIOXIDE = this.getTranslation("CARBONDIOXIDE");
+        this.CARBONATIONLEVEL = this.getTranslation("CARBONATIONLEVEL");
         this.BITTERNESS = this.getTranslation("BITTERNESS");
         this.ALCOHOL = this.getTranslation("ALCOHOL");
     }
