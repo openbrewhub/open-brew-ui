@@ -1,4 +1,4 @@
-name: Deploy Open Brew example to S3
+name: Deploy UI
 
 on:
   push:
