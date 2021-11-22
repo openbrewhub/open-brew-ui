@@ -13,4 +13,4 @@ build-infra:
 
 deploy: build-ui
 	cd infrastructure;	\
-	cdk deploy
+	yarn cdk deploy
