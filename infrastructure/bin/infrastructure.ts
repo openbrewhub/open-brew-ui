@@ -58,7 +58,7 @@ const deployment = new BucketDeployment(stack, 'ui-deployment', {
   distribution,
   destinationBucket: uiBucket,
   distributionPaths: [
-    '/index.html'
+    '/*'
   ],
   prune: true,
   retainOnDelete: false,
