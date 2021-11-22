@@ -11,7 +11,15 @@ build-infra:
 	cd infrastructure; 	\ 
 	yarn build
 
-deploy: build-ui
+
+prepare-deploy: build-ui
 	cd infrastructure;	\
-	yarn;				\
+	yarn;
+
+deploy: prepare-deploy
+	cd infrastructure;	\
 	yarn cdk deploy
+
+deploy-ci: prepare-deploy
+	cd infrastructure;	\
+	yarn cdk deploy --require-approval never
