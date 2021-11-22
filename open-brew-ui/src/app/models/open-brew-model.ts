@@ -208,11 +208,6 @@ export interface Yeast {
     yeastStarterNeeded: boolean;
 }
 
-export interface ApparentAttenuation {
-    amount: number;
-    ratioUnit: string;
-}
-
 export interface SecondaryFermentation {
     _comment4: string;
 }
@@ -220,7 +215,6 @@ export interface SecondaryFermentation {
 export interface Fermentation {
     yeast: Yeast;
     targetTemperature: TargetTemperature;
-    apparentAttenuation: ApparentAttenuation;
     secondaryFermentation: SecondaryFermentation;
 }
 
