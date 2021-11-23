@@ -23,4 +23,4 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}
 
     - name: Deploy UI
-      run: make deploy
+      run: make deploy-ci
