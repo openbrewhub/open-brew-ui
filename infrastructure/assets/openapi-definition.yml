@@ -1,0 +1,694 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Open Brew API
+  description: This is the common standard api description for the exchange of beer brewing recipes. Cheers.
+  license:
+    name: Beerware
+    url: https://de.wikipedia.org/wiki/Beerware
+servers:
+  - url: http://openbrewhub.com/api/v1
+paths:
+  /recipes:
+    get:
+      summary: List all receipes
+      operationId: listRecipes
+      tags:
+        - recipes
+      parameters:
+        - name: limit
+          in: query
+          description: How many brew recipes to return at one time (max/default 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: Offset number for enabling pagination
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: searchQuery
+          in: query
+          description: Search phrase for recipes
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A paged array of brew recipes
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/Recipes"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Create a new recipe
+      operationId: createRecipe
+      tags:
+        - recipes
+      requestBody:
+        description: Add your favourite recipe
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recipe'
+      responses:
+        '201':
+          description: Null response
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    
+  /recipes/{recipeId}:
+    get:
+      summary: Get a specific recipe
+      operationId: getRecipe
+      tags:
+        - recipes
+      parameters:
+        - name: recipeId
+          in: path
+          required: true
+          description: The id of the recipe to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Recipe"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      summary: Replace/update an existing recipe
+      operationId: updateRecipe
+      tags:
+        - recipes
+      parameters:
+        - name: recipeId
+          in: path
+          required: true
+          description: The id of the recipe to replace/update
+          schema:
+            type: string
+      requestBody:
+        description: Add your favourite recipe
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recipe'
+      responses:
+        '201':
+          description: Null response
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Recipe:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        openBrewVersion:
+          description: The version of openbrew in format [0-9].[0-9].[0-9]
+          type: string
+        encoding:
+          description: The used encoding. Default is 'utf-8'
+          type: string
+        info:
+          type: object
+          properties:
+            recipeName:
+              description: The name of your fabulous beer recipe
+              type: string
+            recipeVersion:
+              description: The version of your recipe. Value will be increased automatically,
+                when you update your recipe
+              type: integer
+            beerType:
+              description: The name of your fabulous beer recipe
+              type: string
+            source:
+              type: string
+            createDate:
+              type: string
+            changeDate:
+              type: string
+            images:
+              type: array
+              items:
+              - type: object
+                properties:
+                  url:
+                    type: string
+                  description:
+                    type: array
+                    items:
+                    - type: object
+                      properties:
+                        language:
+                          type: string
+                        text:
+                          type: string
+                      required:
+                      - language
+                      - text
+                    - type: object
+                      properties:
+                        language:
+                          type: string
+                        text:
+                          type: string
+                      required:
+                      - language
+                      - text
+                required:
+                - url
+            recipeDescription:
+              type: array
+              items:
+              - type: object
+                properties:
+                  language:
+                    type: string
+                  text:
+                    type: string
+                required:
+                - language
+                - text
+              - type: object
+                properties:
+                  language:
+                    type: string
+                  text:
+                    type: string
+                required:
+                - language
+                - text
+            author:
+              type: object
+              properties:
+                openBrewHubId:
+                  type: integer
+                commercialBrewery:
+                  type: boolean
+                breweryName:
+                  type: string
+                brewMasterName:
+                  type: string
+                breweryUrl:
+                  type: string
+                phone:
+                  type: string
+                address:
+                  type: object
+                  properties:
+                    street:
+                      type: string
+                    houseNumber:
+                      type: string
+                    zip:
+                      type: string
+                    city:
+                      type: string
+                    federateState:
+                      type: string
+                    country:
+                      type: string
+              required:
+              - breweryName
+          required:
+          - recipeName
+          - recipeVersion
+          - beerType
+          - recipeDescription
+          - author
+        vitalStatistics:
+          type: object
+          properties:
+            expectedEfficiency:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                relativeUnit:
+                  type: string
+              required:
+              - amount
+              - relativeUnit
+            expectedOriginalGravity:
+              type: object
+              properties:
+                amount:
+                  type: number
+                ratioUnit:
+                  type: string
+              required:
+              - amount
+              - ratioUnit
+            expectedFinalGravity:
+              type: object
+              properties:
+                amount:
+                  type: number
+                ratioUnit:
+                  type: string
+              required:
+              - amount
+              - ratioUnit
+            alcoholContent:
+              type: object
+              properties:
+                amount:
+                  type: number
+                ratioUnit:
+                  type: string
+              required:
+              - amount
+              - ratioUnit
+            PhValue:
+              type: object
+              properties:
+                amount:
+                  type: number
+                chemicalUnit:
+                  type: string
+              required:
+              - amount
+              - chemicalUnit
+            waterAlkalinity:
+              type: object
+              properties:
+                amount:
+                  type: number
+                chemicalUnit:
+                  type: string
+              required:
+              - amount
+              - chemicalUnit
+            bitterness:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                tasteUnit:
+                  type: string
+              required:
+              - amount
+              - tasteUnit
+            carbonationLevel:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                ratioUnit:
+                  type: string
+              required:
+              - amount
+              - ratioUnit
+            color:
+              type: object
+              properties:
+                amount:
+                  type: number
+                colorUnit:
+                  type: string
+              required:
+              - amount
+              - colorUnit
+            _comment:
+              type: string
+          required:
+          - expectedEfficiency
+          - expectedOriginalGravity
+          - alcoholContent
+          - bitterness
+          - color
+        brew:
+          type: object
+          properties:
+            mash:
+              type: object
+              properties:
+                suggestedMashTypeDescription:
+                  type: string
+                mashWater:
+                  type: object
+                  properties:
+                    water:
+                      type: object
+                      properties:
+                        amount:
+                          type: integer
+                        volumeUnit:
+                          type: string
+                      required:
+                      - amount
+                      - volumeUnit
+                    waterTreatment:
+                      type: array
+                      items:
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          amount:
+                            type: number
+                          volumeUnit:
+                            type: string
+                        required:
+                        - type
+                        - amount
+                        - volumeUnit
+                  required:
+                  - water
+                solids:
+                  type: array
+                  items:
+                  - type: object
+                    properties:
+                      name:
+                        type: string
+                      type:
+                        type: string
+                      portion:
+                        type: object
+                        properties:
+                          amount:
+                            type: number
+                          weightUnit:
+                            type: string
+                        required:
+                        - amount
+                        - weightUnit
+                    required:
+                    - name
+                    - type
+                    - portion
+                rests:
+                  type: array
+                  items:
+                  - type: object
+                    properties:
+                      name:
+                        type: string
+                      withStirring:
+                        type: boolean
+                      targetTemperature:
+                        type: object
+                        properties:
+                          amount:
+                            type: integer
+                          tempUnit:
+                            type: string
+                        required:
+                        - amount
+                        - tempUnit
+                      restingTime:
+                        type: object
+                        properties:
+                          amount:
+                            type: integer
+                          timeUnit:
+                            type: string
+                        required:
+                        - amount
+                        - timeUnit
+                    required:
+                    - name
+                    - targetTemperature
+                    - restingTime
+              required:
+              - mashWater
+              - solids
+              - rests
+            lauter:
+              type: object
+              properties:
+                withStirring:
+                  type: boolean
+                restingTime:
+                  type: object
+                  properties:
+                    amount:
+                      type: integer
+                    timeUnit:
+                      type: string
+                  required:
+                  - amount
+                  - timeUnit
+                spargeWater:
+                  type: object
+                  properties:
+                    water:
+                      type: object
+                      properties:
+                        amount:
+                          type: integer
+                        volumeUnit:
+                          type: string
+                      required:
+                      - amount
+                      - volumeUnit
+                    waterTreatment:
+                      type: array
+                      items:
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          amount:
+                            type: number
+                          volumeUnit:
+                            type: string
+                        required:
+                        - type
+                        - amount
+                        - volumeUnit
+                    targetTemperature:
+                      type: object
+                      properties:
+                        amount:
+                          type: integer
+                        tempUnit:
+                          type: string
+                      required:
+                      - amount
+                      - tempUnit
+                  required:
+                  - water
+                  - targetTemperature
+              required:
+              - restingTime
+              - spargeWater
+            boil:
+              type: object
+              properties:
+                overallBoilTime:
+                  type: object
+                  properties:
+                    amount:
+                      type: integer
+                    timeUnit:
+                      type: string
+                  required:
+                  - amount
+                  - timeUnit
+                targetTemperature:
+                  type: object
+                  properties:
+                    amount:
+                      type: integer
+                    tempUnit:
+                      type: string
+                  required:
+                  - amount
+                  - tempUnit
+                hops:
+                  type: array
+                  items:
+                  - type: object
+                    properties:
+                      name:
+                        type: string
+                      alphaAcid:
+                        type: object
+                        properties:
+                          amount:
+                            type: number
+                          chemicalUnit:
+                            type: string
+                        required:
+                        - amount
+                        - chemicalUnit
+                      shape:
+                        type: string
+                      type:
+                        type: string
+                      use:
+                        type: string
+                      time:
+                        type: object
+                        properties:
+                          amount:
+                            type: integer
+                          timeUnit:
+                            type: string
+                        required:
+                        - amount
+                        - timeUnit
+                    required:
+                    - name
+                    - alphaAcid
+                    - type
+                    - use
+                    - time
+              required:
+              - overallBoilTime
+              - hops
+            fermentation:
+              type: object
+              properties:
+                yeast:
+                  type: object
+                  properties:
+                    yeastName:
+                      type: string
+                    yeastType:
+                      type: string
+                    yeastAmount:
+                      type: object
+                      properties:
+                        amount:
+                          type: integer
+                        weightUnit:
+                          type: string
+                      required:
+                      - amount
+                      - weightUnit
+                    yeastStarterNeeded:
+                      type: boolean
+                  required:
+                  - yeastName
+                  - yeastType
+                  - yeastAmount
+                targetTemperature:
+                  type: object
+                  properties:
+                    amount:
+                      type: integer
+                    tempUnit:
+                      type: string
+                  required:
+                  - amount
+                  - tempUnit
+                secondaryFermentation:
+                  type: object
+                  properties:
+                    _comment4:
+                      type: string
+                  required:
+                  - _comment4
+              required:
+              - yeast
+              - targetTemperature
+            matureProcess:
+              type: object
+              properties:
+                targetTemperature:
+                  type: object
+                  properties:
+                    amount:
+                      type: number
+                    tempUnit:
+                      type: string
+                  required:
+                  - amount
+                  - tempUnit
+                restingTime:
+                  type: object
+                  properties:
+                    amount:
+                      type: integer
+                    timeUnit:
+                      type: string
+                  required:
+                  - amount
+                  - timeUnit
+                descriptions:
+                  type: array
+                  items:
+                  - type: object
+                    properties:
+                      language:
+                        type: string
+                      text:
+                        type: string
+                    required:
+                    - language
+                    - text
+                  - type: object
+                    properties:
+                      language:
+                        type: string
+                      text:
+                        type: string
+                    required:
+                    - language
+                    - text
+          required:
+          - mash
+          - lauter
+          - boil
+          - fermentation
+      required:
+      - openBrewVersion
+      - encoding
+      - info
+      - vitalStatistics
+      - brew
+
+    Recipes:
+      type: array
+      items:
+        $ref: "#/components/schemas/Recipe"
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
