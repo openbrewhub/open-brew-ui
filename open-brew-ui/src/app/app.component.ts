@@ -96,9 +96,8 @@ export class AppComponent implements AfterViewInit {
           if (newPassword) {
             Auth.completeNewPassword(user, newPassword).then(user => {
               this.currentUser = user;
-            }).catch(e => {
-              console.log(e);
-            }).catch(err => {
+            }).finally(() => {
+              this.fetchI18n();
             });
           } else {
             this.openDialog(true);
