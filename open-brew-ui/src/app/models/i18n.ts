@@ -27,14 +27,14 @@ class Translation {
 class Menu extends I18nTranslation {
     LANGUAGE: Translation = new Translation();
     PRICING: Translation = new Translation();
-    SIGNUP: Translation = new Translation();
+    LOGIN: Translation = new Translation();
 
     constructor(json: any, language: string) {
         super(json, language, "menu");
 
         this.LANGUAGE = this.getTranslation("LANGUAGE");
         this.PRICING = this.getTranslation("PRICING");
-        this.SIGNUP = this.getTranslation("SIGNUP");
+        this.LOGIN = this.getTranslation("LOGIN");
     }
 }
 

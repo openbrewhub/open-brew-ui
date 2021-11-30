@@ -27,7 +27,7 @@ Amplify.configure({
   Auth: {
     region: 'eu-central-1',
     userPoolId: 'eu-central-1_LN0rrKu39',
-    userPoolWebClientId: '1qg171ntpp8bi48rqdg53j6efp',
+    userPoolWebClientId: '7201vhskpe5kc48sb2t4gcovb8',
     mandatorySignIn: false,
     cookieStorage: {
       domain: environment.production ? ".openbrewhub.com" : 'localhost',

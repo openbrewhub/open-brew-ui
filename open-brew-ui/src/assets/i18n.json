@@ -13,7 +13,7 @@
                     "key_plural": "Preise"
                 }
             },
-            "SIGNUP": {
+            "LOGIN": {
                 "translation": {
                     "key": "Anmelden"
                 }
@@ -93,9 +93,9 @@
                     "key_plural": "Pricings"
                 }
             },
-            "SIGNUP": {
+            "LOGIN": {
                 "translation": {
-                    "key": "Sign up"
+                    "key": "Login"
                 }
             }
         },

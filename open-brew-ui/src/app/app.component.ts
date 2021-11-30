@@ -13,7 +13,7 @@ import { SignInDialogComponent } from './sign-in-dialog/sign-in-dialog.component
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit {
-  currentUser: any = {};
+  currentUser: any = null;
   username: string = "";
   password: string = "";
 
@@ -89,7 +89,6 @@ export class AppComponent implements AfterViewInit {
 
   login(username: string, password: string, newPassword: string = "") {
     try {
-
       Auth.signIn(username, password).then(user => {
         this.currentUser = user;
 
@@ -100,15 +99,18 @@ export class AppComponent implements AfterViewInit {
             }).catch(e => {
               console.log(e);
             }).catch(err => {
-
             });
           } else {
             this.openDialog(true);
           }
         }
-      }).catch(e => {
-        console.log(e);
-      });
+      })
+        .catch(e => {
+          console.log(e);
+        })
+        .finally(() => {
+          this.fetchI18n();
+        });
     } catch (error) {
       console.log('error signing in', error);
     }
@@ -129,10 +131,17 @@ export class AppComponent implements AfterViewInit {
             icon: 'attach_money',
           },
           {
-            label: this.i18n.menu.SIGNUP.key,
-            icon: 'login',
+            label: this.currentUser ? `Hi ${this.currentUser.username}` : this.i18n.menu.LOGIN.key,
+            icon: this.currentUser ? '' : 'login',
           },
         ];
+
+        if (this.currentUser) {
+          this.menuItems.push({
+            label: "Logout",
+            icon: "logout",
+          })
+        }
       });
   }
 
@@ -144,6 +153,13 @@ export class AppComponent implements AfterViewInit {
       }
       case "login": {
         this.openDialog();
+        break;
+      }
+      case "logout": {
+        Auth.signOut().then((data) => {
+          this.currentUser = null;
+          this.fetchI18n();
+        });
         break;
       }
     }
