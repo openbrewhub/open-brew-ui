@@ -26,8 +26,8 @@ import { environment } from 'src/environments/environment';
 Amplify.configure({
   Auth: {
     region: 'eu-central-1',
-    userPoolId: 'eu-central-1_LN0rrKu39',
-    userPoolWebClientId: '7201vhskpe5kc48sb2t4gcovb8',
+    userPoolId: 'eu-central-1_8kRn2sTWT',
+    userPoolWebClientId: '1uvk0kjqc6c29c1v2a5l0q7d4', 
     mandatorySignIn: false,
     cookieStorage: {
       domain: environment.production ? ".openbrewhub.com" : 'localhost',
