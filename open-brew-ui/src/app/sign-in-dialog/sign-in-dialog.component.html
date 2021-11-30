@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Hi {{data.user}}</h1>
+<div mat-dialog-content>
+    <mat-form-field *ngIf="!data.newPasswordRequired" appearance="fill">
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="data.user">
+    </mat-form-field>
+    <mat-form-field *ngIf="!data.newPasswordRequired" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput [(ngModel)]="data.password">
+    </mat-form-field>
+    <mat-form-field *ngIf="data.newPasswordRequired" appearance="fill">
+        <mat-label>New Password</mat-label>
+        <input type="password" matInput [(ngModel)]="data.newPassword">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button [matDialogClose]="data" cdkFocusInitial>Ok</button>
+</div>

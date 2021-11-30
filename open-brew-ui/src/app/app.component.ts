@@ -1,8 +1,11 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Inject, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { i18n } from './models/i18n'
 import { OpenBrew, OpenBrewViewModel } from './models/open-brew-model';
 import { MenuItem } from './models/menu-item';
+import { Auth } from 'aws-amplify';
+import { MatDialog, } from '@angular/material/dialog';
+import { SignInDialogComponent } from './sign-in-dialog/sign-in-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +13,9 @@ import { MenuItem } from './models/menu-item';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit {
+  currentUser: any = {};
+  username: string = "";
+  password: string = "";
 
   get language(): string {
     let language = localStorage.getItem("language") as string;
@@ -30,15 +36,40 @@ export class AppComponent implements AfterViewInit {
 
   menuItems: MenuItem[] = [];
 
-  constructor(private httpClient: HttpClient) {
-    this.fetchI18n();
+  constructor(
+    private httpClient: HttpClient,
+    public dialog: MatDialog,
+  ) {
+    Auth.currentAuthenticatedUser().then((user) => {
+      this.currentUser = user;
+    }).finally(() => {
+      this.fetchI18n();
+    });
+  }
+
+  openDialog(newPasswordRequired: boolean = false): void {
+    const dialogRef = this.dialog.open(SignInDialogComponent, {
+      width: '250px',
+      data: {
+        newPasswordRequired,
+      },
+    });
+
+    dialogRef.beforeClosed().subscribe(result => {
+      if (!newPasswordRequired) {
+        this.username = result.user;
+        this.password = result.password;
+      }
+
+      this.login(this.username, this.password, result.newPassword);
+    });
   }
 
   ngAfterViewInit() {
-    this.newMethod();
+    this.getSchema();
   }
 
-  private newMethod() {
+  private getSchema() {
     this.httpClient.get('https://openbrew-definition-prod.s3.eu-central-1.amazonaws.com/open-brew-1-0-0.example.json', { responseType: 'json' })
       .subscribe(response => {
         let openBrew = response as OpenBrew;
@@ -53,15 +84,41 @@ export class AppComponent implements AfterViewInit {
       this.language = "en";
 
     this.fetchI18n();
+    this.getSchema();
+  }
 
-    this.newMethod();
+  login(username: string, password: string, newPassword: string = "") {
+    try {
+
+      Auth.signIn(username, password).then(user => {
+        this.currentUser = user;
+
+        if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
+          if (newPassword) {
+            Auth.completeNewPassword(user, newPassword).then(user => {
+              this.currentUser = user;
+            }).catch(e => {
+              console.log(e);
+            }).catch(err => {
+
+            });
+          } else {
+            this.openDialog(true);
+          }
+        }
+      }).catch(e => {
+        console.log(e);
+      });
+    } catch (error) {
+      console.log('error signing in', error);
+    }
   }
 
   fetchI18n() {
     this.httpClient.get('assets/i18n.json', { responseType: 'json' })
       .subscribe(response => {
         this.i18n = new i18n(response, this.language);
-        
+
         this.menuItems = [
           {
             label: this.i18n.menu.LANGUAGE.key,
@@ -80,6 +137,15 @@ export class AppComponent implements AfterViewInit {
   }
 
   onClick($event: Event) {
-    this.changeLanguage();
+    switch (($event.currentTarget as any).id) {
+      case "language": {
+        this.changeLanguage();
+        break;
+      }
+      case "login": {
+        this.openDialog();
+        break;
+      }
+    }
   }
 }

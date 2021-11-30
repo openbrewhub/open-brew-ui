@@ -2,7 +2,7 @@
   <span fxFlex>
     <img src="../assets/logo.png" height="50">
     openbrewhub.com</span>
-  <button mat-button *ngFor="let item of menuItems" fxHide.xs (click)="onClick($event)">
+  <button mat-button *ngFor="let item of menuItems" fxHide.xs (click)="onClick($event)" id="{{item.icon}}">
     <mat-icon class="mr">{{item.icon}}</mat-icon>
     {{item.label}}
   </button>
@@ -11,7 +11,7 @@
   </button>
   <mat-menu #dropMenu="matMenu" >
     <ng-container *ngFor="let item of menuItems">
-      <button mat-menu-item  (click)="onClick($event)">
+      <button mat-menu-item  (click)="onClick($event)" id="{{item.icon}}">
         <mat-icon  class="mr">{{item.icon}}</mat-icon>
         {{item.label}}
       </button>
